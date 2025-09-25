@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import PlausibleProvider from 'next-plausible';
 
 export const metadata: Metadata = {
   title: "Design is a voice",
@@ -30,10 +31,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">
-        {children}
-      </body>
-    </html>
+    <PlausibleProvider domain="designisavoice.com">
+      <html lang="en">
+        <body className="antialiased">
+          {children}
+        </body>
+      </html>
+    </PlausibleProvider>
   );
 }
