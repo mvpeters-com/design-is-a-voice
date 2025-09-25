@@ -92,7 +92,7 @@ export default function InfiniteImageScroller() {
                         className="flex-shrink-0"
                         style={{ width: "80vw" }}
                     >
-                        <div className="relative w-full h-[80vh]">
+                        <div className="relative w-full aspect-[2/1]">
                             <Image
                                 src={poster.path}
                                 alt={poster.name}
