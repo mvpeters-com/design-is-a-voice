@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     description: "Red line for Palestine",
     images: [
       {
-        url: "/share.png",
+        url: "https://designisavoice.com/share.png",
         width: 1200,
         height: 630,
         alt: "Design is a voice - Red line for Palestine",
