@@ -6,7 +6,7 @@ import { Ticker } from "motion-plus/react";
 
 import { motion, useMotionValue, useMotionValueEvent, useAnimationFrame } from "motion/react"
 import Image from "next/image"
-import { useRef } from "react"
+import { useRef, useEffect } from "react"
 import postersData from "../posters.json"
 
 interface Poster {
@@ -14,7 +14,7 @@ interface Poster {
     name: string;
 }
 
-function PosterItem({ src, title }: { src: string; title: string }) {
+function PosterItem({ src, title, priority = false }: { src: string; title: string; priority?: boolean }) {
     return (
         <motion.div className="w-[75vw] aspect-[2/1] overflow-hidden relative">
             <Image
@@ -23,6 +23,7 @@ function PosterItem({ src, title }: { src: string; title: string }) {
                 fill
                 className="object-cover select-none"
                 sizes="75vw"
+                priority={priority}
                 draggable={false}
             />
         </motion.div>
@@ -59,14 +60,20 @@ export default function InfiniteImageScroller() {
         }
     })
 
-    // Create poster items from your data
-    const posterItems = postersData.map((poster: Poster) => (
-        <PosterItem
-            key={poster.name}
-            src={poster.path}
-            title={poster.name}
-        />
-    ))
+
+    // Create poster items with priority loading for first 3 and last item
+    const posterItems = postersData.map((poster: Poster, index: number) => {
+        const isHighPriority = index < 3 || index === postersData.length - 1;
+
+        return (
+            <PosterItem
+                key={poster.name}
+                src={poster.path}
+                title={poster.name}
+                priority={isHighPriority}
+            />
+        )
+    })
 
     return (
         <>
