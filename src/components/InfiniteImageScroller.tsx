@@ -6,7 +6,7 @@ import { Ticker } from "motion-plus/react";
 
 import { motion, useMotionValue, useMotionValueEvent, useAnimationFrame } from "motion/react"
 import Image from "next/image"
-import { useRef } from "react"
+import { useMemo, useRef } from "react"
 import postersData from "../posters.json"
 
 interface Poster {
@@ -62,18 +62,23 @@ export default function InfiniteImageScroller() {
 
 
     // Create poster items with priority loading for first 3 and last item
-    const posterItems = postersData.map((poster: Poster, index: number) => {
-        const isHighPriority = index < 3 || index === postersData.length - 1;
+    const posterItems = useMemo(() => {
+        return postersData
+            // random order
+            .sort(() => Math.random() - 0.5)
+            .map((poster: Poster, index: number) => {
+                const isHighPriority = index < 3 || index === postersData.length - 1;
 
-        return (
-            <PosterItem
-                key={poster.name}
-                src={poster.path}
-                title={poster.name}
-                priority={isHighPriority}
-            />
-        )
-    })
+                return (
+                    <PosterItem
+                        key={poster.name}
+                        src={poster.path}
+                        title={poster.name}
+                        priority={isHighPriority}
+                    />
+                )
+            })
+    }, [postersData])
 
     return (
         <>
