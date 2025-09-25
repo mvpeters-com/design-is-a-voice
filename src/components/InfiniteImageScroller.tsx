@@ -6,7 +6,7 @@ import { Ticker } from "motion-plus/react";
 
 import { motion, useMotionValue, useMotionValueEvent, useAnimationFrame } from "motion/react"
 import Image from "next/image"
-import { useRef, useEffect } from "react"
+import { useRef } from "react"
 import postersData from "../posters.json"
 
 interface Poster {
@@ -82,7 +82,7 @@ export default function InfiniteImageScroller() {
                 _dragX={offset} // Currently a private, but stable Motion API
                 offset={offset}
                 items={posterItems}
-                className="ticker touch-none select-none cursor-grab active:cursor-grabbing w-screen"
+                className="ticker bg-[#FFBDB5] touch-none select-none cursor-grab active:cursor-grabbing w-screen"
                 velocity={0} // Disable built-in velocity, we'll handle it manually
                 gap={0}
                 hoverFactor={1} // No hover effect since we're managing it manually
