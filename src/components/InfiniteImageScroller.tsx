@@ -6,7 +6,7 @@ import { Ticker } from "motion-plus/react";
 
 import { motion, useMotionValue, useMotionValueEvent, useAnimationFrame } from "motion/react"
 import Image from "next/image"
-import { useMemo, useRef } from "react"
+import { useMemo, useRef, useState, useEffect } from "react"
 import postersData from "../posters.json"
 
 interface Poster {
@@ -16,13 +16,13 @@ interface Poster {
 
 function PosterItem({ src, title, priority = false }: { src: string; title: string; priority?: boolean }) {
     return (
-        <motion.div className="w-[75vw] aspect-[2/1] overflow-hidden relative">
+        <motion.div className="w-[95vw] md:w-[75vw] aspect-[2/1] overflow-hidden relative">
             <Image
                 src={src}
                 alt={title}
                 fill
                 className="object-cover select-none"
-                sizes="75vw"
+                sizes="(max-width: 768px) 95vw, 75vw"
                 priority={priority}
                 draggable={false}
             />
@@ -35,6 +35,37 @@ export default function InfiniteImageScroller() {
     const isDragging = useRef(false)
     const lastOffset = useRef(0)
     const autoScrollSpeed = 30 // pixels per second
+    const [currentAuthor, setCurrentAuthor] = useState<string>("")
+
+    // Randomized poster data (memoized to keep consistent order)
+    const randomizedPosters = useMemo(() => {
+        return [...postersData].sort(() => Math.random() - 0.5)
+    }, [])
+
+    // Calculate current author based on offset
+    const calculateCurrentAuthor = (currentOffset: number) => {
+        // Each image is approximately 95vw on mobile, 75vw on desktop
+        // For calculation, let's use an average viewport width
+        const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1200
+        const imageWidth = viewportWidth < 768 ? viewportWidth * 0.95 : viewportWidth * 0.75
+
+        // Calculate which image index should be most visible
+        // The offset is negative as images move left
+        const centerPosition = Math.abs(currentOffset)
+
+        // Add half the image width to switch when the next image becomes more visible
+        // This makes it switch at the 50% point instead of waiting for full center
+        const adjustedPosition = centerPosition + (imageWidth * 0.5)
+        const imageIndex = Math.floor(adjustedPosition / imageWidth) % randomizedPosters.length
+
+        return randomizedPosters[imageIndex]?.name || ""
+    }
+
+    // Set initial author on mount
+    useEffect(() => {
+        const initialAuthor = calculateCurrentAuthor(offset.get())
+        setCurrentAuthor(initialAuthor)
+    }, [randomizedPosters])
 
     // Track when dragging starts/stops by monitoring offset changes
     useMotionValueEvent(offset, "change", (latest) => {
@@ -49,6 +80,13 @@ export default function InfiniteImageScroller() {
             }, 100)
         }
 
+        // Update current author based on offset
+        const newAuthor = calculateCurrentAuthor(latest)
+
+        if (newAuthor !== currentAuthor) {
+            setCurrentAuthor(newAuthor)
+        }
+
         lastOffset.current = latest
     })
 
@@ -60,14 +98,11 @@ export default function InfiniteImageScroller() {
         }
     })
 
-
     // Create poster items with priority loading for first 3 and last item
     const posterItems = useMemo(() => {
-        return postersData
-            // random order
-            .sort(() => Math.random() - 0.5)
+        return randomizedPosters
             .map((poster: Poster, index: number) => {
-                const isHighPriority = index < 3 || index === postersData.length - 1;
+                const isHighPriority = index < 3 || index === randomizedPosters.length - 1;
 
                 return (
                     <PosterItem
@@ -78,10 +113,25 @@ export default function InfiniteImageScroller() {
                     />
                 )
             })
-    }, [postersData])
+    }, [randomizedPosters])
 
     return (
         <>
+            {/* Author name display in top right corner */}
+            <motion.div
+                className="fixed top-16 md:top-24 left-4 md:left-8 font-[16] text-[#E4230A]"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{
+                    opacity: currentAuthor ? 1 : 0,
+                    y: currentAuthor ? 0 : -20
+                }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+            >
+                <p className="text-sm font-medium whitespace-nowrap">
+                    {currentAuthor}
+                </p>
+            </motion.div>
+
             <Ticker
                 drag="x"
                 _dragX={offset} // Currently a private, but stable Motion API
