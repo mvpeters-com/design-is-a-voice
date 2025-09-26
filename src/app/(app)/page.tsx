@@ -10,6 +10,7 @@ async function getPosters() {
     const { docs: posters } = await payload.find({
       collection: "posters",
       depth: 2, // This will populate the poster relationship with media data
+      pagination: false,
     });
 
     return posters as (Poster & { poster: Media })[];
@@ -27,5 +28,8 @@ export const revalidate = 3600; // Revalidate every hour (3600 seconds)
 
 export default async function HomePage() {
   const posters = await getPosters();
+
+  console.log(posters.length);
+
   return <Home posters={posters} />;
 }

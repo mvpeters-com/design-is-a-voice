@@ -73,7 +73,6 @@ export default function InfiniteImageScroller({ posters }: { posters: (Poster & 
     const calculateCurrentAuthor = (currentOffset: number): Author | null => {
         // Each image is approximately 95vw on mobile, 75vw on desktop
         // For calculation, let's use an average viewport width
-        const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
         let imageW = imageWidth.current;
 
         // Calculate which image index should be most visible
