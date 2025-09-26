@@ -192,7 +192,7 @@ export interface Media {
 export interface Poster {
   id: number;
   name: string;
-  company: string;
+  company?: string | null;
   url: string;
   poster: number | Media;
   updatedAt: string;

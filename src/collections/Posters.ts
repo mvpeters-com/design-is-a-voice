@@ -30,7 +30,7 @@ export const Posters: CollectionConfig = {
     {
       name: "company",
       type: "text",
-      required: true,
+      required: false,
       label: "Company Name",
     },
 
