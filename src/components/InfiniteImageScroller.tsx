@@ -8,6 +8,8 @@ import { motion, useMotionValue, useMotionValueEvent, useAnimationFrame } from "
 import Image from "next/image"
 import { useMemo, useRef, useState, useEffect } from "react"
 import postersData from "../posters.json"
+import { useAtom } from "jotai";
+import { authorAtom } from "@/name";
 
 interface Poster {
     path: string;
@@ -36,7 +38,8 @@ export default function InfiniteImageScroller() {
     const isDragging = useRef(false)
     const lastOffset = useRef(0)
     const autoScrollSpeed = 30 // pixels per second
-    const [currentAuthor, setCurrentAuthor] = useState<string>("")
+
+    const [currentAuthor, setCurrentAuthor] = useAtom(authorAtom)
 
     // Randomized poster data (memoized to keep consistent order)
     const randomizedPosters = useMemo(() => {
@@ -121,21 +124,6 @@ export default function InfiniteImageScroller() {
 
     return (
         <>
-            {/* Author name display in top right corner */}
-            <motion.div
-                className="fixed top-16 md:top-24 left-4 md:left-8 font-[16] text-[#E4230A]"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{
-                    opacity: currentAuthor ? 1 : 0,
-                    y: currentAuthor ? 0 : -20
-                }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-            >
-                <p className="text-sm font-medium whitespace-nowrap">
-                    {currentAuthor}
-                </p>
-            </motion.div>
-
             <Ticker
                 drag="x"
                 _dragX={offset} // Currently a private, but stable Motion API

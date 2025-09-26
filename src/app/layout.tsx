@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import PlausibleProvider from 'next-plausible';
+import { Provider } from 'jotai'
 
 export const metadata: Metadata = {
   title: "Design is a voice",
@@ -32,11 +33,13 @@ export default function RootLayout({
 }>) {
   return (
     <PlausibleProvider domain="designisavoice.com">
-      <html lang="en">
-        <body className="antialiased">
-          {children}
-        </body>
-      </html>
+      <Provider>
+        <html lang="en">
+          <body className="antialiased">
+            {children}
+          </body>
+        </html>
+      </Provider>
     </PlausibleProvider>
   );
 }
