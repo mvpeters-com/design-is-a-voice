@@ -38,6 +38,7 @@ export default function InfiniteImageScroller() {
     const isDragging = useRef(false)
     const lastOffset = useRef(0)
     const autoScrollSpeed = 30 // pixels per second
+    const imageWidth = useRef(0);
 
     const [currentAuthor, setCurrentAuthor] = useAtom(authorAtom)
 
@@ -46,24 +47,39 @@ export default function InfiniteImageScroller() {
         return [...postersData].sort(() => Math.random() - 0.5)
     }, [])
 
+    useEffect(() => {
+        function resize() {
+            let width = document.querySelector(".ticker img:first-child")?.clientWidth;
+            console.log("width", width);
+            imageWidth.current = width || 0;//select an image and get its widtrh
+        }
+        if (typeof window !== 'undefined') {
+            window.addEventListener("resize", resize);
+            resize();
+        }
+
+        return () => {
+            if (typeof window !== 'undefined') {
+                window.removeEventListener("resize", resize);
+            }
+        }
+    }, [])
+
     // Calculate current author based on offset
     const calculateCurrentAuthor = (currentOffset: number) => {
-        console.log(randomizedPosters);
         // Each image is approximately 95vw on mobile, 75vw on desktop
         // For calculation, let's use an average viewport width
         const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
-        const imageWidth = viewportWidth < 768 ? viewportWidth * 0.95 : viewportWidth * 0.75
+        let imageW = imageWidth.current;
 
         // Calculate which image index should be most visible
         // The offset is negative as images move left
         const centerPosition = Math.abs(currentOffset);
 
-        console.log("viewportWidth", viewportWidth, centerPosition);
-
         // Add half the image width to switch when the next image becomes more visible
         // This makes it switch at the 50% point instead of waiting for full center
-        const adjustedPosition = centerPosition + (imageWidth * 0.5)
-        const imageIndex = Math.floor(adjustedPosition / imageWidth) % randomizedPosters.length
+        const adjustedPosition = centerPosition + (imageW * 0.5)
+        const imageIndex = Math.floor(adjustedPosition / imageW) % randomizedPosters.length
 
         return randomizedPosters[imageIndex]?.name || ""
     }
