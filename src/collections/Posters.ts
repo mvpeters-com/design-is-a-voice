@@ -8,6 +8,18 @@ export const Posters: CollectionConfig = {
   access: {
     read: () => true,
   },
+  hooks: {
+    afterChange: [
+      async () => {
+        try {
+          const revalidateUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/api/revalidate?secret=${process.env.REVALIDATION_SECRET}&path=/`;
+          await fetch(revalidateUrl, { method: "POST" });
+        } catch (error) {
+          console.error("Failed to revalidate:", error);
+        }
+      },
+    ],
+  },
   fields: [
     {
       name: "name",

@@ -19,6 +19,12 @@ async function getPosters() {
   }
 }
 
+// Add cache tags for more granular control
+export const dynamic = 'force-static'
+export const fetchCache = 'force-cache'
+
+export const revalidate = 3600; // Revalidate every hour (3600 seconds)
+
 export default async function HomePage() {
   const posters = await getPosters();
   return <Home posters={posters} />;
