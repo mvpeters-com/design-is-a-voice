@@ -15,7 +15,6 @@ import type { Poster, Media } from "@/payload-types";
 function PosterItem({ src, title, priority = false }: { src: string; title: string; priority?: boolean }) {
     const [realPriority, setRealPriority] = useState(priority);
 
-
     useEffect(() => {
         setTimeout(() => {
             setRealPriority(true);
@@ -87,7 +86,7 @@ export default function InfiniteImageScroller({ posters }: { posters: (Poster & 
         const imageIndex = Math.floor(adjustedPosition / imageW) % randomizedPosters.length
 
         const poster = randomizedPosters[imageIndex];
-        return poster ? { name: poster.name, url: poster.url, company: poster.company } : null;
+        return poster ? { name: poster.name, url: poster.url, company: poster.company || undefined } : null;
     }
 
     // Set initial author on mount
