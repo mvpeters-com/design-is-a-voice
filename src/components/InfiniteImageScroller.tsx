@@ -16,16 +16,17 @@ interface Poster {
 
 function PosterItem({ src, title, priority = false }: { src: string; title: string; priority?: boolean }) {
     return (
-        <motion.div className="w-[95vw] md:w-[75vw] aspect-[2/1] overflow-hidden relative">
+        <motion.div className="w-[95vw] md:w-[75vw] aspect-[2/1] md:max-h-[600px] max-h-[calc(100vh-300px)] overflow-hidden relative">
             <Image
                 src={src}
                 alt={title}
                 fill
                 className="object-cover select-none"
-                sizes="(max-width: 768px) 95vw, 75vw"
+                sizes="95vw"
                 priority={priority}
                 draggable={false}
             />
+            <div className="text-white text-sm absolute bottom-0 left-0">{title}</div>
         </motion.div>
     )
 }
@@ -44,14 +45,17 @@ export default function InfiniteImageScroller() {
 
     // Calculate current author based on offset
     const calculateCurrentAuthor = (currentOffset: number) => {
+        console.log(randomizedPosters);
         // Each image is approximately 95vw on mobile, 75vw on desktop
         // For calculation, let's use an average viewport width
-        const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1200
+        const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
         const imageWidth = viewportWidth < 768 ? viewportWidth * 0.95 : viewportWidth * 0.75
 
         // Calculate which image index should be most visible
         // The offset is negative as images move left
-        const centerPosition = Math.abs(currentOffset)
+        const centerPosition = Math.abs(currentOffset);
+
+        console.log("viewportWidth", viewportWidth, centerPosition);
 
         // Add half the image width to switch when the next image becomes more visible
         // This makes it switch at the 50% point instead of waiting for full center
