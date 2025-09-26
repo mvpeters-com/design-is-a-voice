@@ -11,7 +11,7 @@ export default function Home() {
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    <div className="flex flex-col justify-between w-full h-dvh">
+    <div className="flex flex-col justify-between min-h-dvh">
       <div className="flex p-4 md:p-8">
         <h1 className="text-[32px] md:text-[48px] font-bold">
           Design is a voice.

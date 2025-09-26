@@ -16,17 +16,17 @@ interface Poster {
 
 function PosterItem({ src, title, priority = false }: { src: string; title: string; priority?: boolean }) {
     return (
-        <motion.div className="w-[95vw] md:w-[75vw] aspect-[2/1] md:max-h-[600px] max-h-[calc(100vh-300px)] overflow-hidden relative">
+        <motion.div className="w-[95vw] md:w-[75vw] aspect-[2/1] max-w-[1200px] overflow-hidden relative">
             <Image
                 src={src}
                 alt={title}
                 fill
                 className="object-cover select-none"
-                sizes="95vw"
+                sizes="(max-width: 768px) 95vw, 75vw"
                 priority={priority}
                 draggable={false}
             />
-            <div className="text-white text-sm absolute bottom-0 left-0">{title}</div>
+            <div className="text-white text-sm absolute bottom-0 left-0 opacity-0">{title}</div>
         </motion.div>
     )
 }
@@ -141,12 +141,11 @@ export default function InfiniteImageScroller() {
                 _dragX={offset} // Currently a private, but stable Motion API
                 offset={offset}
                 items={posterItems}
-                className="ticker bg-[#FFBDB5] touch-none select-none cursor-grab active:cursor-grabbing w-screen"
+                className="ticker bg-[#FFBDB5] touch-none select-none cursor-grab active:cursor-grabbing"
                 velocity={0} // Disable built-in velocity, we'll handle it manually
                 gap={0}
                 hoverFactor={1} // No hover effect since we're managing it manually
             />
-            <Stylesheet />
         </>
     )
 }
