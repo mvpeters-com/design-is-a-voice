@@ -60,15 +60,20 @@ const ParticipateModal = ({ isOpen, onRequestClose }: ParticipateModalProps) => 
                 </div>
 
                 <div className="flex gap-3">
-                  <div className="w-10 h-10 border-2 border-white text-white flex items-center justify-center font-bold text-sm">
+                  <a
+                    href="/templates/design_is_a_voice_template.psd"
+                    download="design_is_a_voice_template.psd"
+                    className="w-10 h-10 border-2 rounded-md border-white text-white flex items-center justify-center font-bold text-sm hover:bg-white hover:text-[#E4230A] transition-colors cursor-pointer"
+                  >
                     Ps
-                  </div>
-                  <div className="w-10 h-10 border-2 border-white text-white flex items-center justify-center font-bold text-sm">
+                  </a>
+                  <a
+                    href="/templates/design_is_a_voice_template.ai"
+                    download="design_is_a_voice_template.ai"
+                    className="w-10 h-10 border-2 rounded-md border-white text-white flex items-center justify-center font-bold text-sm hover:bg-white hover:text-[#E4230A] transition-colors cursor-pointer"
+                  >
                     Ai
-                  </div>
-                  <div className="w-10 h-10 border-2 border-white text-white flex items-center justify-center font-bold text-sm">
-                    Fg
-                  </div>
+                  </a>
                 </div>
               </div>
 
@@ -87,26 +92,31 @@ const ParticipateModal = ({ isOpen, onRequestClose }: ParticipateModalProps) => 
               <div className="flex justify-between items-end">
                 <div className="flex flex-col gap-6">
                   <div className="flex flex-col gap-0">
-                    <div className="flex gap-2 text-base text-white">
+                    <div className="flex gap-2 text-base text-black">
                       <span>Size:</span>
                       <span className="font-bold">3000×1500px</span>
                     </div>
-                    <div className="flex gap-2 text-base text-white">
+                    <div className="flex gap-2 text-base text-black">
                       <span>Color:</span>
                       <span className="font-bold">#E4230A</span>
                     </div>
                   </div>
 
                   <div className="flex gap-3">
-                    <div className="w-10 h-10 border-2 border-white text-white flex items-center justify-center font-bold text-sm">
+                    <a
+                      href="/templates/design_is_a_voice_template.psd"
+                      download="design_is_a_voice_template.psd"
+                      className="w-10 h-10 border-2 border-white rounded-md text-white flex items-center justify-center font-bold text-sm hover:bg-white hover:text-[#E4230A] transition-colors cursor-pointer"
+                    >
                       Ps
-                    </div>
-                    <div className="w-10 h-10 border-2 border-white text-white flex items-center justify-center font-bold text-sm">
+                    </a>
+                    <a
+                      href="/templates/design_is_a_voice_template.ai"
+                      download="design_is_a_voice_template.ai"
+                      className="w-10 h-10 border-2 border-white rounded-md text-white flex items-center justify-center font-bold text-sm hover:bg-white hover:text-[#E4230A] transition-colors cursor-pointer"
+                    >
                       Ai
-                    </div>
-                    <div className="w-10 h-10 border-2 border-white text-white flex items-center justify-center font-bold text-sm">
-                      Fg
-                    </div>
+                    </a>
                   </div>
                 </div>
 
