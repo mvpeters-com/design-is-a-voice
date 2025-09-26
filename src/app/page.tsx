@@ -40,7 +40,7 @@ export default function Home() {
             className="self-end cursor-pointer bg-transparent border-none text-inherit"
             onClick={openModal}
           >
-            participate
+            submit
           </button>
           <a className="self-end" target="_blank" href="https://www.icrc.org/en/donate/israelgaza">donate</a>
         </div>

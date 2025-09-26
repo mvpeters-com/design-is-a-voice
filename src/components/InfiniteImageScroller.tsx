@@ -6,7 +6,7 @@ import { Ticker } from "motion-plus/react";
 
 import { motion, useMotionValue, useMotionValueEvent, useAnimationFrame } from "motion/react"
 import Image from "next/image"
-import { useMemo, useRef, useState, useEffect } from "react"
+import { useMemo, useRef, useEffect, useState } from "react"
 import postersData from "../posters.json"
 import { useAtom } from "jotai";
 import { authorAtom } from "@/name";
@@ -17,6 +17,15 @@ interface Poster {
 }
 
 function PosterItem({ src, title, priority = false }: { src: string; title: string; priority?: boolean }) {
+    const [realPriority, setRealPriority] = useState(priority);
+
+
+    useEffect(() => {
+        setTimeout(() => {
+            setRealPriority(true);
+        }, 500);
+    }, []);
+
     return (
         <motion.div className="w-[95vw] md:w-[75vw] aspect-[2/1] max-w-[1200px] overflow-hidden relative">
             <Image
@@ -25,7 +34,7 @@ function PosterItem({ src, title, priority = false }: { src: string; title: stri
                 fill
                 className="object-cover select-none"
                 sizes="(max-width: 768px) 95vw, 75vw"
-                priority={priority}
+                priority={realPriority}
                 draggable={false}
             />
             <div className="text-white text-sm absolute bottom-0 left-0 opacity-0">{title}</div>
