@@ -192,6 +192,7 @@ export interface Media {
 export interface Poster {
   id: number;
   name: string;
+  company: string;
   url: string;
   poster: number | Media;
   updatedAt: string;
@@ -339,6 +340,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface PostersSelect<T extends boolean = true> {
   name?: T;
+  company?: T;
   url?: T;
   poster?: T;
   updatedAt?: T;

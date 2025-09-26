@@ -28,6 +28,13 @@ export const Posters: CollectionConfig = {
       label: "Designer Name",
     },
     {
+      name: "company",
+      type: "text",
+      required: true,
+      label: "Company Name",
+    },
+
+    {
       name: "url",
       type: "text",
       required: true,
