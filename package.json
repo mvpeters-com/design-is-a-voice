@@ -25,7 +25,8 @@
     "payload": "^3.57.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-modal": "^3.16.3"
+    "react-modal": "^3.16.3",
+    "sharp": "^0.34.4"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
