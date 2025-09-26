@@ -87,7 +87,7 @@ export default function InfiniteImageScroller({ posters }: { posters: (Poster & 
         const imageIndex = Math.floor(adjustedPosition / imageW) % randomizedPosters.length
 
         const poster = randomizedPosters[imageIndex];
-        return poster ? { name: poster.name, url: poster.url } : null;
+        return poster ? { name: poster.name, url: poster.url, company: poster.company } : null;
     }
 
     // Set initial author on mount

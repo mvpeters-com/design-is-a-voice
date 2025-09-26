@@ -8,14 +8,27 @@ export default function AuthorName() {
 
     if (!author) return null;
 
-    return (
+    return <>
         <a
             href={author.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:underline"
+            className="hover:underline md:hidden block"
         >
-            {author.name}
+            {author.name} {author.company ? <>
+                <br /><span>{author.company}</span>
+            </> : ""}
         </a>
-    );
+        <a
+            href={author.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline hidden md:block"
+        >
+            {author.name} {author.company ? <>
+                - {author.company}
+            </> : ""}
+        </a>
+    </>
+
 }
