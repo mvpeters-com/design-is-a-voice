@@ -7,14 +7,10 @@ import { Ticker } from "motion-plus/react";
 import { motion, useMotionValue, useMotionValueEvent, useAnimationFrame } from "motion/react"
 import Image from "next/image"
 import { useMemo, useRef, useEffect, useState } from "react"
-import postersData from "../posters.json"
 import { useAtom } from "jotai";
-import { authorAtom } from "@/name";
+import { authorAtom, Author } from "@/name";
+import type { Poster, Media } from "@/payload-types";
 
-interface Poster {
-    path: string;
-    name: string;
-}
 
 function PosterItem({ src, title, priority = false }: { src: string; title: string; priority?: boolean }) {
     const [realPriority, setRealPriority] = useState(priority);
@@ -42,7 +38,7 @@ function PosterItem({ src, title, priority = false }: { src: string; title: stri
     )
 }
 
-export default function InfiniteImageScroller() {
+export default function InfiniteImageScroller({ posters }: { posters: (Poster & { poster: Media })[] }) {
     const offset = useMotionValue(0)
     const isDragging = useRef(false)
     const lastOffset = useRef(0)
@@ -53,14 +49,14 @@ export default function InfiniteImageScroller() {
 
     // Randomized poster data (memoized to keep consistent order)
     const randomizedPosters = useMemo(() => {
-        return [...postersData].sort(() => Math.random() - 0.5)
-    }, [])
+        return [...posters].sort(() => Math.random() - 0.5)
+    }, [posters])
 
     useEffect(() => {
         function resize() {
             let width = document.querySelector(".ticker img:first-child")?.clientWidth;
             console.log("width", width);
-            imageWidth.current = width || 0;//select an image and get its widtrh
+            imageWidth.current = width || 0;
         }
         if (typeof window !== 'undefined') {
             window.addEventListener("resize", resize);
@@ -75,7 +71,7 @@ export default function InfiniteImageScroller() {
     }, [])
 
     // Calculate current author based on offset
-    const calculateCurrentAuthor = (currentOffset: number) => {
+    const calculateCurrentAuthor = (currentOffset: number): Author | null => {
         // Each image is approximately 95vw on mobile, 75vw on desktop
         // For calculation, let's use an average viewport width
         const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1200;
@@ -90,7 +86,8 @@ export default function InfiniteImageScroller() {
         const adjustedPosition = centerPosition + (imageW * 0.5)
         const imageIndex = Math.floor(adjustedPosition / imageW) % randomizedPosters.length
 
-        return randomizedPosters[imageIndex]?.name || ""
+        const poster = randomizedPosters[imageIndex];
+        return poster ? { name: poster.name, url: poster.url } : null;
     }
 
     // Set initial author on mount
@@ -115,7 +112,7 @@ export default function InfiniteImageScroller() {
         // Update current author based on offset
         const newAuthor = calculateCurrentAuthor(latest)
 
-        if (newAuthor !== currentAuthor) {
+        if (newAuthor && (!currentAuthor || newAuthor.name !== currentAuthor.name)) {
             setCurrentAuthor(newAuthor)
         }
 
@@ -133,13 +130,15 @@ export default function InfiniteImageScroller() {
     // Create poster items with priority loading for first 3 and last item
     const posterItems = useMemo(() => {
         return randomizedPosters
-            .map((poster: Poster, index: number) => {
+            .map((poster, index: number) => {
                 const isHighPriority = index < 3 || index === randomizedPosters.length - 1;
+
+                const posterUrl = typeof poster.poster === 'object' && poster.poster?.url ? poster.poster.url : "";
 
                 return (
                     <PosterItem
                         key={poster.name}
-                        src={poster.path}
+                        src={posterUrl}
                         title={poster.name}
                         priority={isHighPriority}
                     />

@@ -2,6 +2,7 @@
   "name": "design-is-a-voice",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
@@ -10,11 +11,18 @@
     "format": "biome format --write"
   },
   "dependencies": {
+    "@payloadcms/db-postgres": "^3.57.0",
+    "@payloadcms/next": "^3.57.0",
+    "@payloadcms/payload-cloud": "^3.57.0",
+    "@payloadcms/richtext-lexical": "^3.57.0",
+    "@payloadcms/storage-vercel-blob": "^3.57.0",
+    "graphql": "^16.11.0",
     "jotai": "^2.15.0",
     "motion": "^12.23.22",
     "motion-plus": "https://api.motion.dev/registry?package=motion-plus&version=1.5.4&token=f019d193a516948c56bb8a925744fd72c3db9abc9bc01d8b35dc301fc244ae02",
     "next": "15.5.4",
     "next-plausible": "^3.12.4",
+    "payload": "^3.57.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-modal": "^3.16.3"

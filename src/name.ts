@@ -1,3 +1,8 @@
 import { atom } from "jotai";
 
-export const authorAtom = atom("");
+export interface Author {
+  name: string;
+  url: string;
+}
+
+export const authorAtom = atom<Author | null>(null);

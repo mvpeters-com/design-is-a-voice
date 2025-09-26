@@ -1,62 +1,77 @@
 [
     {
         "path": "/posters/bastien_genbrugge.png",
-        "name": "Bastien Genbrugge"
+        "name": "Bastien Genbrugge",
+        "url": "https://www.instagram.com/bastien_genbrugge/"
     },
     {
         "path": "/posters/dieter_desmet.png",
-        "name": "Dieter Desmet"
+        "name": "Dieter Desmet",
+        "url": "https://www.linkedin.com/in/desmetdieter"
     },
     {
         "path": "/posters/geertrui_storms.png",
-        "name": "Geertrui Storms"
+        "name": "Geertrui Storms",
+        "url": "https://www.stormscreative.be/"
     },
     {
         "path": "/posters/goed_goed.png",
-        "name": "Goed Goed"
+        "name": "Goed Goed",
+        "url": "https://www.madebyhanna.com/"
     },
     {
         "path": "/posters/hanne_van_gils.png",
-        "name": "Hanne Van Gils"
+        "name": "Hanne Van Gils",
+        "url": "https://www.linkedin.com/in/hanne-van-gils-01aa24100"
     },
     {
         "path": "/posters/ines_de_peuter.png",
-        "name": "Ines De Peuter"
+        "name": "Ines De Peuter",
+        "url": "https://www.linkedin.com/in/ines-de-peuter-65b642130/?originalSubdomain=be"
     },
     {
         "path": "/posters/julie_vangeel.png",
-        "name": "Julie Vangeel"
+        "name": "Julie Vangeel",
+        "url": "https://www.julievangeel.be/"
     },
     {
         "path": "/posters/laura_broux.png",
-        "name": "Laura Broux"
+        "name": "Laura Broux",
+        "url": "https://laurabroux.com/"
     },
     {
         "path": "/posters/mathias_de_winter.png",
-        "name": "Mathias De Winter"
+        "name": "Mathias De Winter",
+        "url": "https://www.linkedin.com/in/mathiasdewinter"
     },
     {
         "path": "/posters/mirror_mirror_1.png",
-        "name": "Mirror Mirror 1"
+        "name": "Mirror Mirror",
+        "url": "https://www.mirrormirror.be/"
     },
     {
         "path": "/posters/mirror_mirror_2.png",
-        "name": "Mirror Mirror 2"
+        "name": "Mirror Mirror",
+        "url": "https://www.mirrormirror.be/"
     },
     {
         "path": "/posters/mona_venlet.png",
-        "name": "Mona Venlet"
+        "name": "Mona Venlet",
+        "url": "https://www.instagram.com/monavenlet/"
     },
     {
         "path": "/posters/pieter_boels.png",
-        "name": "Pieter Boels"
+        "name": "Pieter Boels",
+        "url": "https://www.studiopieterboels.be/"
     },
     {
         "path": "/posters/selma_pasalic.png",
-        "name": "Selma Pasalic"
+        "name": "Selma Pasalic",
+        "url": "https://www.linkedin.com/in/selma-pa%C5%A1ali%C4%87-539857248/?originalSubdomain=be"
     },
     {
         "path": "/posters/ward_heirwegh.png",
-        "name": "Ward Heirwegh"
+        "name": "Ward Heirwegh",
+        "url": "https://www.wardheirwegh.com/"
     }
 ]
