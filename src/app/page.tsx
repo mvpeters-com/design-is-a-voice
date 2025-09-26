@@ -4,11 +4,21 @@ import { useState } from "react";
 import InfiniteImageScroller from "../components/InfiniteImageScroller";
 import ParticipateModal from "../components/ParticipateModal";
 import AuthorName from "@/components/AuthorName";
+import { usePlausible } from 'next-plausible';
 
 export default function Home() {
+  const plausible = usePlausible()
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => setIsModalOpen(true);
+  const openModal = () => {
+    plausible('openModal', {
+      props: {
+        buttonId: 'submit',
+      },
+    })
+    return setIsModalOpen(true);
+  };
   const closeModal = () => setIsModalOpen(false);
 
   return (
