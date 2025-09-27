@@ -22,13 +22,13 @@ function PosterItem({ src, title, priority = false }: { src: string; title: stri
     }, []);
 
     return (
-        <motion.div className="w-[95vw] md:w-[75vw] aspect-[2/1] max-h-none xl:max-h-[calc(100dvh-320px)] overflow-hidden relative">
+        <motion.div className="w-[200vw] md:w-[75vw] aspect-[2/1] max-h-none xl:max-h-[calc(100dvh-320px)] overflow-hidden relative">
             <Image
                 src={src}
                 alt={title}
                 fill
                 className="object-cover select-none"
-                sizes="(max-width: 768px) 95vw, 75vw"
+                sizes="(max-width: 768px) 200vw, 75vw"
                 priority={realPriority}
                 draggable={false}
             />
@@ -71,7 +71,7 @@ export default function InfiniteImageScroller({ posters }: { posters: (Poster & 
 
     // Calculate current author based on offset
     const calculateCurrentAuthor = (currentOffset: number): Author | null => {
-        // Each image is approximately 95vw on mobile, 75vw on desktop
+        // Each image is approximately 150vw on mobile, 75vw on desktop
         // For calculation, let's use an average viewport width
         let imageW = imageWidth.current;
 

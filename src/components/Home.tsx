@@ -37,7 +37,7 @@ export default function Home({ posters }: { posters: (Poster & { poster: Media }
 
             <InfiniteImageScroller posters={posters} />
 
-            <div className="flex flex-row flex-col w-full justify-between align-center p-6 md:p-10">
+            <div className="h-[75px] flex flex-row flex-col w-full justify-between align-center p-6 md:p-10">
                 <div className="flex  text-[16px] text-[#E4230A] flex md:hidden items-end">
                     <AuthorName />
                 </div>
