@@ -22,13 +22,13 @@ function PosterItem({ src, title, priority = false }: { src: string; title: stri
     }, []);
 
     return (
-        <motion.div className="w-[200vw] md:w-[75vw] aspect-[2/1] max-h-none xl:max-h-[calc(100dvh-320px)] overflow-hidden relative">
+        <motion.div className="w-[120vw] md:w-[75vw] aspect-[2/1] max-h-none xl:max-h-[calc(100dvh-320px)] overflow-hidden relative">
             <Image
                 src={src}
                 alt={title}
                 fill
                 className="object-cover select-none"
-                sizes="(max-width: 768px) 200vw, 75vw"
+                sizes="(max-width: 768px) 120vw, 75vw"
                 priority={realPriority}
                 draggable={false}
             />
